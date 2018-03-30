@@ -3,8 +3,8 @@ export class User {
   private firstName: string;
   private lastName: string;
   private birthDate: Date;
-  private country: string;
-  private completed: boolean;
+  public country: string;
+  public completed: boolean;
 
 
 }

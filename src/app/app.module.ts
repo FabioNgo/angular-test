@@ -5,8 +5,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppLoginComponent} from './login/app.login.component';
 import {
-  MatButtonModule,
-  MatCardModule, MatCheckboxModule,
+  MatButtonModule, MatButtonToggleModule,
+  MatCardModule, MatCheckboxModule, MatChipsModule,
   MatDividerModule,
   MatFormFieldModule, MatGridListModule,
   MatIconModule,
@@ -50,7 +50,7 @@ const appRoutes: Routes = [
     ),
     BrowserModule, MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule,
     MatToolbarModule, MatDividerModule, MatListModule, MatMenuModule, MatIconModule, MatSidenavModule, MatCardModule, MatGridListModule,
-    MatTableModule, MatCheckboxModule
+    MatTableModule, MatCheckboxModule, MatButtonToggleModule, MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

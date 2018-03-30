@@ -36,3 +36,35 @@
 .uncompleted {
   color: red;
 }
+.mat-button-toggle-group {
+  background-color: transparent;
+  box-shadow: none;
+}
+.mat-button-toggle {
+  margin: 5px;
+}
+.mat-button-toggle-checked {
+  color: white;
+  background-color: black;
+}
+.character-filter {
+  color: gray;
+  background-color: transparent;
+  box-shadow: none;
+}
+.character-filter .mat-button-toggle-checked{
+  color: red;
+  background-color: transparent;
+}
+.country-chip {
+  color: red;
+  background-color: transparent;
+  box-shadow: none;
+}
+.country-chip mat-icon {
+  color: black;
+  transform: rotate(45deg);
+}
+.hide {
+  display: none;
+}

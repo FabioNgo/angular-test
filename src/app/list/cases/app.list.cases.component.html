@@ -1,13 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-card>
   <mat-grid-list cols="7" rowHeight="50px">
-    <mat-grid-tile id="status_filter" [rowspan]="1" class="center">
-      Status<br/>
-      All cases
+    <mat-grid-tile [rowspan]="1" class="center">
+      Status
     </mat-grid-tile>
-    <mat-grid-tile id="country_filter" [rowspan]="1">
-      Country<br/>
-      2 Countries
+    <mat-grid-tile id="" [rowspan]="1">
+      Country
     </mat-grid-tile>
     <mat-grid-tile id="reset_filter" [rowspan]="1">
       Reset Filter
@@ -17,7 +15,49 @@
       <input type="search" class="searchbox" placeholder="Search">
       <!--</mat-form-field>-->
     </mat-grid-tile>
+    <mat-grid-tile id="status_filter" [rowspan]="1" class="center">
+      <button mat-button (click)="showFilter('status')">{{selectedStatusFilter}}</button>
+    </mat-grid-tile>
+    <mat-grid-tile id="country_filter" [rowspan]="1">
+      <button mat-button (click)="showFilter('country')">{{selectedCountryFilterList.size}} {{selectedCountryFilterList.size < 2 ?'country': 'countries'}}</button>
+    </mat-grid-tile>
   </mat-grid-list>
+  <div id="statusFilterListing" class="{{isShowingStatusFilter?'':'hide'}}">
+    <mat-button-toggle-group>
+      <mat-button-toggle *ngFor="let status of statusFilterList" value="{{status}}"
+                         (change)="selectedStatusChange($event)">
+        {{status}}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div id="countryFilterListing" class="{{isShowingCountryFilter?'':'hide'}}">
+    <div>
+      <mat-button-toggle-group class="character-filter">
+        <mat-button-toggle  *ngFor="let character of alphabetFilterList" value="{{character}}"
+                           (change)="selectedCharacterChange(character)">
+          {{character}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div>
+      <mat-button-toggle-group multiple>
+        <mat-button-toggle *ngFor="let country of countryFilterList" value="{{country}}"
+                           (change)="selectedCountryChange($event)"
+        >
+          {{country}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div>
+      <mat-chip-list>
+        <mat-chip class="country-chip" *ngFor="let country of selectedCountryFilterList" [removable]="true" (remove)="removeSelectedCountry(country)">
+          {{country}}
+          <mat-icon matChipRemove>add_circle</mat-icon>
+        </mat-chip>
+
+      </mat-chip-list>
+    </div>
+  </div>
 </mat-card>
 
 <mat-card style="margin-top: 50px">
@@ -71,7 +111,8 @@
     <ng-container matColumnDef="Uncompleted">
       <mat-header-cell *matHeaderCellDef> Uncompleted</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span class="{{element.completed?'completed':'uncompleted'}}">{{element.completed?'Completed':'Uncompleted'}}</span>
+        <span
+          class="{{element.completed?'completed':'uncompleted'}}">{{element.completed?'Completed':'Uncompleted'}}</span>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="Actions">
