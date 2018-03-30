@@ -1,6 +1,9 @@
 import {FormControl, Validators} from '@angular/forms';
 import {LoginErrorStateMatcher} from './login-error-state-matcher';
 import {Component} from '@angular/core';
+import {Constants} from '../utilities/Constants';
+import {States} from '../utilities/States';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +16,10 @@ export class AppLoginComponent {
   passwordFormControl: FormControl;
   loginErrorMatcher: LoginErrorStateMatcher;
   loginErrorMess: string;
+  router: Router;
 
-  constructor() {
+  constructor(router: Router) {
+    this.router = router;
     this.usernameFormControl = new FormControl('', [
       Validators.required,
     ]);
@@ -29,9 +34,15 @@ export class AppLoginComponent {
     this.passwordFormControl.markAsTouched();
     if (!this.loginErrorMatcher.isErrorState(this.usernameFormControl, null)
       && !this.loginErrorMatcher.isErrorState(this.passwordFormControl, null)) {
-      this.loginErrorMess = 'Logging in';
+      if (this.usernameFormControl.value === Constants.username && this.passwordFormControl.value === Constants.password) {
+        this.loginErrorMess = '';
+        States.LogIn();
+        this.router.navigate(['/list']);
+      } else {
+        this.loginErrorMess = 'Username or password is wrong';
+      }
     } else {
-      this.loginErrorMess = 'logged in fail';
+      this.loginErrorMess = '';
     }
   }
 }

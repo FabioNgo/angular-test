@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {States} from './utilities/States';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(router: Router) {
+    if (!States.isLoggedIn()) {
+      router.navigate(['/login']);
+    } else {
+      // router.navigate(['/list']);
+    }
+  }
 }
