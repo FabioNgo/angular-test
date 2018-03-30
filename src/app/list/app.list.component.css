@@ -19,7 +19,34 @@
 .side-nav {
   width: 200px;
   height: auto;
+  background-color: black;
+}
+.side-nav-list mat-list-item {
+  color: white
+  /*width: 200px;*/
+  /*height: auto;*/
+  /*background-color: black;*/
+}
+.side-nav-list .selected-item {
+  width: 10px;
+  height: 100%;
+  margin-left: -10px;
+  margin-right: 20px;
+  /*width: 200px;*/
+  /*height: auto;*/
+  background-color: red;
+}
+.side-nav-list .not-selected-item {
+  width: 10px;
+  height: 100%;
+  margin-left: -10px;
+  margin-right: 20px;
+  /*width: 200px;*/
+  /*height: auto;*/
 }
 .main-container {
   min-height: 900px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
 }
