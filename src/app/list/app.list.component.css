@@ -1,0 +1,25 @@
+.toolbar {
+  background: white;
+  padding: 10px;
+}
+.mat-divider {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100%;
+}
+.right {
+  align-content: right;
+}
+.left {
+  align-content: left;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+.side-nav {
+  width: 200px;
+  height: auto;
+}
+.main-container {
+  min-height: 900px;
+}
