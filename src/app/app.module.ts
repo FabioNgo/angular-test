@@ -1,32 +1,57 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {AppLoginComponent} from './login/app.login.component';
-import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
+import {AppListComponent} from './list/app.list.component';
+import {AppListCasesComponent} from './list/cases/app.list.cases.component';
+
 const appRoutes: Routes = [
-  { path: 'login', component: AppLoginComponent },
-  // { path: 'heroes',        component: HeroListComponent },
-  // { path: '',   redirectTo: '/heroes', pathMatch: 'full' },
-  // { path: '**', component: PageNotFoundComponent }
+  {path: 'login', component: AppLoginComponent},
+  {
+    path: 'list',
+    component: AppListComponent,
+    children: [
+      {
+        path: 'cases',
+        component: AppListCasesComponent
+      }
+    ]
+  },
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     AppLoginComponent,
+    AppListComponent,
+    AppListCasesComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
     ),
-    BrowserModule, MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule
+    BrowserModule, MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule,
+    MatToolbarModule, MatDividerModule, MatListModule, MatMenuModule, MatIconModule, MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
