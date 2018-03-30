@@ -1,0 +1,70 @@
+.toolbar {
+  background: white;
+  padding: 10px;
+}
+.mat-divider {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100%;
+}
+.right {
+  align-content: right;
+}
+.left {
+  align-content: left;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+.side-nav {
+  width: 200px;
+  height: auto;
+  background-color: black;
+}
+.main-container {
+  min-height: 900px;
+}
+.searchbox {
+  width: 100%;
+  height: 100%;
+  background-color: darkgray;
+  border-width: 0px;
+}
+.completed {
+  color: green;
+}
+.uncompleted {
+  color: red;
+}
+.mat-button-toggle-group {
+  background-color: transparent;
+  box-shadow: none;
+}
+.mat-button-toggle {
+  margin: 5px;
+}
+.mat-button-toggle-checked {
+  color: white;
+  background-color: black;
+}
+.character-filter {
+  color: gray;
+  background-color: transparent;
+  box-shadow: none;
+}
+.character-filter .mat-button-toggle-checked{
+  color: red;
+  background-color: transparent;
+}
+.country-chip {
+  color: red;
+  background-color: transparent;
+  box-shadow: none;
+}
+.country-chip mat-icon {
+  color: black;
+  transform: rotate(45deg);
+}
+.hide {
+  display: none;
+}

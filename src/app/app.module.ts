@@ -5,14 +5,15 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppLoginComponent} from './login/app.login.component';
 import {
-  MatButtonModule,
+  MatButtonModule, MatButtonToggleModule,
+  MatCardModule, MatCheckboxModule, MatChipsModule,
   MatDividerModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
-  MatSidenavModule,
+  MatSidenavModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
       appRoutes,
     ),
     BrowserModule, MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule,
-    MatToolbarModule, MatDividerModule, MatListModule, MatMenuModule, MatIconModule, MatSidenavModule
+    MatToolbarModule, MatDividerModule, MatListModule, MatMenuModule, MatIconModule, MatSidenavModule, MatCardModule, MatGridListModule,
+    MatTableModule, MatCheckboxModule, MatButtonToggleModule, MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
