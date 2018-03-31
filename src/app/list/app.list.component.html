@@ -1,36 +1,53 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <mat-toolbar class="toolbar">
-  <span class="mat-primary">Client Name/Logo</span>
-  <mat-divider class="mat-divider" [vertical]="true"></mat-divider>
-  <span class="mat-accent">Company Name/Logo</span>
-  <span class="toolbar-spacer"></span>
-  <span>
-    <button mat-button [matMenuTriggerFor]="menu">
-      Settings <mat-icon>arrow_drop_down</mat-icon>
+  <div [ngStyle]="{'display' : !isMobile ? 'none' : 'block'}">
+    <button type="button" mat-icon-button (click)="sidenav.open()">
+      <mat-icon>menu</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
-      </button>
-    </mat-menu>
+  </div>
+  <span class="primary toolbar">Client Name/Logo</span>
+  <mat-divider class="mat-divider" [vertical]="true"></mat-divider>
+  <span class="accent toolbar">Company Name/Logo</span>
+  <span class="toolbar-spacer"></span>
+  <span *ngIf="!isMobile">
+    <button mat-button [matMenuTriggerFor]="menu">
+      Settings<mat-icon>arrow_drop_down</mat-icon>
+    </button>
   </span>
-  <span>
+  <span *ngIf="!isMobile">
     <button mat-button (click)="logout()">Logout</button>
   </span>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav mode="side" class="side-nav" opened>
+  <mat-sidenav mode="side" #sidenav class="side-nav" [opened]="!isMobile" [mode]="!isMobile ? 'side' : 'over'">
     <mat-nav-list class="side-nav-list">
-    <mat-list-item *ngFor="let menu of menus" >
-      <span class="{{menu.selected? 'selected-item':'not-selected-item'}}"></span>
-      <span><a id="{{menu.id}} "matLine routerLink="{{menu.link}}" (click)="clickItem(menu)">{{menu.name}}</a></span>
+      <mat-list-item *ngFor="let menu of menus">
+        <span class="{{menu.selected? 'selected-item':'not-selected-item'}}"></span>
+        <span><a id="{{menu.id}} " matLine routerLink="{{menu.link}}" (click)="clickItem(menu)">{{menu.name}}</a></span>
 
-    </mat-list-item>
+      </mat-list-item>
     </mat-nav-list>
+    <mat-list *ngIf="isMobile" class="side-nav-list">
+      <mat-list-item>
+        <button mat-button [matMenuTriggerFor]="menu">
+          Settings
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+      </mat-list-item>
+      >
+      <mat-list-item>
+        <button mat-button (click)="logout()">Logout</button>
+      </mat-list-item>
+    </mat-list>
   </mat-sidenav>
   <mat-sidenav-content class="main-container">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>

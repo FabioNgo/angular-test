@@ -1,5 +1,6 @@
 import {MatPaginator, PageEvent} from '@angular/material';
 import {AfterContentChecked, Component} from '@angular/core';
+import {EventListener} from "../EventListener";
 
 @Component({
   selector: 'app-my-paginator',
@@ -8,23 +9,38 @@ import {AfterContentChecked, Component} from '@angular/core';
 })
 
 export class MyPaginatorComponent extends MatPaginator implements AfterContentChecked {
+  public paginatorButtons = [];
   private readonly PREV_STR = 'Previous';
   private readonly NEXT_STR = 'Next';
   private readonly NUM_PAGES_SHOWN = 3;
-  private paginatorButtons = [];
+  private readonly NUM_PAGES_SHOWN_MOBILE = 1;
+  private isMobile: boolean;
 
   ngAfterContentChecked() {
     this.updatePaginatorButtons();
+    this.isMobile = window.innerWidth < 840;
+
+    const self = this;
+    EventListener.onWidthChangeListener({
+      notify(data) {
+        self.isMobile = data < 840;
+        self.updatePaginatorButtons();
+      }
+    });
   }
 
   updatePaginatorButtons() {
     this.paginatorButtons = [];
+    let numPagesShown = this.NUM_PAGES_SHOWN;
+    if (this.isMobile) {
+      numPagesShown = this.NUM_PAGES_SHOWN_MOBILE;
+    }
 
     if (this.hasPreviousPage()) {
       this.paginatorButtons.push(this.PREV_STR);
     }
-    const firstIndexPage = Math.max(this.pageIndex - Math.floor(this.NUM_PAGES_SHOWN / 2), 0);
-    const lastIndexPage = Math.min(firstIndexPage + this.NUM_PAGES_SHOWN - 1, this.getNumberOfPages());
+    const firstIndexPage = Math.max(this.pageIndex - Math.floor(numPagesShown / 2), 0);
+    const lastIndexPage = Math.min(firstIndexPage + numPagesShown - 1, this.getNumberOfPages());
     for (let i = firstIndexPage; i <= lastIndexPage; i++) {
       this.paginatorButtons.push((i + 1).toString());
     }

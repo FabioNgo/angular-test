@@ -4,6 +4,7 @@ import {User} from '../../models/user';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MyPaginatorComponent} from '../../utilities/mypaginator/app.utilities.mypaginator.component';
 import {AppListCasesEditComponent} from './edit/app.list.cases.edit.component';
+import {EventListener} from "../../utilities/EventListener";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AppListCasesComponent implements AfterViewInit {
   public editModal: MatDialog;
   @ViewChild(MyPaginatorComponent) paginator: MyPaginatorComponent;
   public pageEvent: PageEvent;
+  public isMobile: boolean;
   private selectedCharacter = '';
 
   constructor(dialog: MatDialog) {
@@ -41,6 +43,13 @@ export class AppListCasesComponent implements AfterViewInit {
     this.alphabetFilterList = this.generateAlphabetFilterList();
     this.statusFilterList = this.getStatusFilterList();
     // this.countryFilterList = this.getCountryList();
+    const self = this;
+    self.isMobile = window.innerWidth < 840;
+    EventListener.onWidthChangeListener({
+      notify(data) {
+        self.isMobile = data < 840;
+      }
+    });
   }
 
   ngAfterViewInit() {
