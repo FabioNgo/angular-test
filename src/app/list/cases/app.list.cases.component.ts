@@ -198,4 +198,12 @@ export class AppListCasesComponent implements AfterViewInit {
     }
     return result;
   }
+
+  resetFilter() {
+    this.selectedStatusFilter = 'All cases';
+    this.selectedCountryFilterList = new Set<string>();
+    this.hideCountryFilter();
+    this.hideStatusFilter();
+    this.filterData();
+  }
 }
