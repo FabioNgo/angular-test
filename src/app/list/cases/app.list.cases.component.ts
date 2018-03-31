@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {MatButtonToggleChange, MatTableDataSource} from '@angular/material';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatButtonToggleChange, MatTableDataSource, PageEvent} from '@angular/material';
 import {User} from '../../models/user';
 import {SelectionModel} from '@angular/cdk/collections';
+import {MyPaginatorComponent} from "../../utilities/mypaginator/app.utilities.mypaginator.component";
 
 
 @Component({
@@ -10,7 +11,7 @@ import {SelectionModel} from '@angular/cdk/collections';
   styleUrls: ['./app.list.cases.component.css']
 })
 
-export class AppListCasesComponent {
+export class AppListCasesComponent implements AfterViewInit {
   public statusFilterList: string[];
   public alphabetFilterList: string[];
   public countryFilterList: string[];
@@ -19,9 +20,11 @@ export class AppListCasesComponent {
   public selectedCountryFilterList: Set<string>;
   public isShowingStatusFilter = false;
   public isShowingCountryFilter = false;
-  private displayedColumns: string[];
-  private selection: SelectionModel<User>;
-  private users: User[];
+  public displayedColumns: string[];
+  public selection: SelectionModel<User>;
+  public users: User[];
+  @ViewChild(MyPaginatorComponent) paginator: MyPaginatorComponent;
+  public pageEvent: PageEvent;
   private selectedCharacter = '';
 
   constructor() {
@@ -35,6 +38,11 @@ export class AppListCasesComponent {
     this.alphabetFilterList = this.generateAlphabetFilterList();
     this.statusFilterList = this.getStatusFilterList();
     // this.countryFilterList = this.getCountryList();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    // this.dataSource._updatePaginator(this.paginator.pageSize);
   }
 
   genData(): User[] {
@@ -127,6 +135,10 @@ export class AppListCasesComponent {
     this.filterData();
   }
 
+  search(searchBox) {
+    this.dataSource.filter = searchBox.value;
+  }
+
   private getCountryList() {
     return ['AA', 'AB', 'BC', 'C', 'D'];
   }
@@ -187,11 +199,11 @@ export class AppListCasesComponent {
     return result;
   }
 
-  private hideAlphaBetFilterList() {
-    this.alphabetFilterList = [];
-  }
-
-  private showAlphabetFilterList() {
-    this.alphabetFilterList = this.generateAlphabetFilterList();
+  resetFilter() {
+    this.selectedStatusFilter = 'All cases';
+    this.selectedCountryFilterList = new Set<string>();
+    this.hideCountryFilter();
+    this.hideStatusFilter();
+    this.filterData();
   }
 }

@@ -1,0 +1,4 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<button mat-button *ngFor="let button of paginatorButtons" (click)="goPage(button)">
+  <span class="{{isSelected(button)?'selected-page':''}}">{{button}}</span>
+</button>
