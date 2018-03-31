@@ -100,7 +100,7 @@
 
     <ng-container matColumnDef="Birth Date">
       <mat-header-cell *matHeaderCellDef> Birth Date</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.birthDate}}</mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.getFormattedBirthDate()}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Country">

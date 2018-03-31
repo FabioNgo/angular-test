@@ -1,0 +1,63 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="edit-modal" xmlns="http://www.w3.org/1999/html">
+  <div id="edit-header">
+    <span mat-dialog-title class="red">Edit {{user.firstName}} {{user.lastName}} Details </span>
+  </div>
+  <div id="edit-form">
+    <span mat-dialog-title class="red">Users Details </span>
+    <div>
+      <form [formGroup]="editFormGroup">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="First Name" value="{{user.firstName}}" required
+                   formControlName="firstName">
+            <mat-hint></mat-hint>
+            <mat-error *ngIf="editFormGroup.get('firstName').hasError('required')">
+              First Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Last Name" value="{{user.lastName}}" required formControlName="lastName">
+            <mat-hint></mat-hint>
+            <mat-error *ngIf="editFormGroup.get('lastName').hasError('required')">
+              Last Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Phone Number" value="{{user.phoneNumber}}" required
+                   formControlName="phoneNumber">
+            <mat-hint></mat-hint>
+            <mat-error *ngIf="editFormGroup.get('phoneNumber').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput  [matDatepicker]="myDatepicker" placeholder="Birth Date" required
+                   formControlName="birthDate" disabled="true">
+
+            <mat-hint></mat-hint>
+            <mat-error *ngIf="editFormGroup.get('birthDate').hasError('required')">
+              Birth Date is <strong>required</strong>
+            </mat-error>
+
+          </mat-form-field>
+          <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker disabled="false"></mat-datepicker>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div>
+    <mat-dialog-actions>
+      <button class="edit-cancel" mat-dialog-close mat-button>Cancel</button>
+      <span style="flex: 1 1 auto"></span>
+      <button class="edit-submit" mat-button (click)="updateAccount()">Update Account</button>
+    </mat-dialog-actions>
+  </div>
+</div>

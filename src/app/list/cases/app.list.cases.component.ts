@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatButtonToggleChange, MatTableDataSource, PageEvent} from '@angular/material';
+import {MatButtonToggleChange, MatDialog, MatTableDataSource, PageEvent} from '@angular/material';
 import {User} from '../../models/user';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MyPaginatorComponent} from "../../utilities/mypaginator/app.utilities.mypaginator.component";
+import {MyPaginatorComponent} from '../../utilities/mypaginator/app.utilities.mypaginator.component';
+import {AppListCasesEditComponent} from './edit/app.list.cases.edit.component';
 
 
 @Component({
@@ -23,11 +24,13 @@ export class AppListCasesComponent implements AfterViewInit {
   public displayedColumns: string[];
   public selection: SelectionModel<User>;
   public users: User[];
+  public editModal: MatDialog;
   @ViewChild(MyPaginatorComponent) paginator: MyPaginatorComponent;
   public pageEvent: PageEvent;
   private selectedCharacter = '';
 
-  constructor() {
+  constructor(dialog: MatDialog) {
+    this.editModal = dialog;
     this.users = this.genData();
     this.dataSource = new MatTableDataSource<User>(this.users);
     this.displayedColumns = ['select', 'IMG', 'First Name', 'Last Name', 'Birth Date', 'Country', 'Uncompleted', 'Actions'];
@@ -47,15 +50,9 @@ export class AppListCasesComponent implements AfterViewInit {
 
   genData(): User[] {
 
-    const result = [];
+    const result: User[] = [];
     for (let i = 0; i < 10; i++) {
-      result.push({
-        firstName: 'A' + i,
-        lastName: 'B' + i,
-        birthDate: new Date(),
-        country: 'AA',
-        completed: i % 2 === 0,
-      });
+      result.push(new User(i, 'A' + i, 'B' + i, 'AA', 1 % 2 === 0, '', '', '2017/02/28'));
     }
     return result;
   }
@@ -73,7 +70,19 @@ export class AppListCasesComponent implements AfterViewInit {
   }
 
   openModal(element) {
-
+    const diaLogRef = this.editModal.open(AppListCasesEditComponent, {
+      data: element
+    });
+    const self = this;
+    diaLogRef.afterClosed().subscribe(function (result) {
+      for (let i = 0; i < self.users.length; i++) {
+        const user = self.users[i];
+        if (user.id === element.id) {
+          self.users[i] = result;
+          return;
+        }
+      }
+    });
   }
 
   getStatusFilterList() {
@@ -139,6 +148,14 @@ export class AppListCasesComponent implements AfterViewInit {
     this.dataSource.filter = searchBox.value;
   }
 
+  resetFilter() {
+    this.selectedStatusFilter = 'All cases';
+    this.selectedCountryFilterList = new Set<string>();
+    this.hideCountryFilter();
+    this.hideStatusFilter();
+    this.filterData();
+  }
+
   private getCountryList() {
     return ['AA', 'AB', 'BC', 'C', 'D'];
   }
@@ -197,13 +214,5 @@ export class AppListCasesComponent implements AfterViewInit {
       result.push(String.fromCharCode(begin + i));
     }
     return result;
-  }
-
-  resetFilter() {
-    this.selectedStatusFilter = 'All cases';
-    this.selectedCountryFilterList = new Set<string>();
-    this.hideCountryFilter();
-    this.hideStatusFilter();
-    this.filterData();
   }
 }
