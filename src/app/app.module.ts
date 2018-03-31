@@ -12,7 +12,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatMenuModule,
+  MatMenuModule, MatPaginatorModule,
   MatSidenavModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
@@ -21,6 +21,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 import {AppListComponent} from './list/app.list.component';
 import {AppListCasesComponent} from './list/cases/app.list.cases.component';
+import {MyPaginatorComponent} from "./utilities/mypaginator/app.utilities.mypaginator.component";
 
 const appRoutes: Routes = [
   {path: 'login', component: AppLoginComponent},
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     AppComponent,
     AppLoginComponent,
     AppListComponent,
-    AppListCasesComponent
+    AppListCasesComponent,
+    MyPaginatorComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -50,7 +52,7 @@ const appRoutes: Routes = [
     ),
     BrowserModule, MatButtonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule,
     MatToolbarModule, MatDividerModule, MatListModule, MatMenuModule, MatIconModule, MatSidenavModule, MatCardModule, MatGridListModule,
-    MatTableModule, MatCheckboxModule, MatButtonToggleModule, MatChipsModule
+    MatTableModule, MatCheckboxModule, MatButtonToggleModule, MatChipsModule, MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

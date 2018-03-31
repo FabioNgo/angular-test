@@ -127,12 +127,11 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"
              (click)="selection.toggle(row)">
     </mat-row>
+
   </mat-table>
 </mat-card>
 <mat-card style="margin-top: 50px; margin-bottom: 50px">
-  <button mat-button>Previous</button>
-  <button mat-button>1</button>
-  <button mat-button>2</button>
-  <button mat-button>3</button>
-  <button mat-button>Next</button>
+<app-my-paginator #paginator [pageSize]="3">
+
+</app-my-paginator>
 </mat-card>
