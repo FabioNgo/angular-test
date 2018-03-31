@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatButtonToggleChange, MatPaginator, MatPaginatorIntl, MatTableDataSource, PageEvent} from '@angular/material';
+import {MatButtonToggleChange, MatTableDataSource, PageEvent} from '@angular/material';
 import {User} from '../../models/user';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MyPaginatorComponent} from "../../utilities/mypaginator/app.utilities.mypaginator.component";
@@ -133,6 +133,10 @@ export class AppListCasesComponent implements AfterViewInit {
   removeSelectedCountry(country: string) {
     this.selectedCountryFilterList.delete(country);
     this.filterData();
+  }
+
+  search(searchBox) {
+    this.dataSource.filter = searchBox.value;
   }
 
   private getCountryList() {
