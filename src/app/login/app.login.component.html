@@ -10,7 +10,7 @@
   <div class="login-info">
     <div>
     <mat-form-field>
-      <input matInput placeholder="Username" [formControl]="usernameFormControl" required  value="" [errorStateMatcher]="usernameMatcher">
+      <input matInput placeholder="Username" [formControl]="usernameFormControl" required   [errorStateMatcher]="usernameMatcher">
       <mat-hint></mat-hint>
       <mat-error *ngIf="usernameFormControl.hasError('required')">
         Username is <strong>required</strong>
@@ -19,7 +19,7 @@
     </div>
     <div>
     <mat-form-field>
-      <input matInput placeholder="Password" type="password" required [formControl]="passwordFormControl" value="" [errorStateMatcher]="passwordMatcher">
+      <input matInput placeholder="Password" type="password" required [formControl]="passwordFormControl" [errorStateMatcher]="passwordMatcher">
       <mat-hint></mat-hint>
       <mat-error *ngIf="passwordFormControl.hasError('required')">
         Password is <strong>required</strong>

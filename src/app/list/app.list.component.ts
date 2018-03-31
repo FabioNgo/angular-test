@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import {States} from "../utilities/States";
 
 @Component({
   selector: 'app-list',
@@ -48,5 +49,10 @@ export class AppListComponent implements OnInit {
         this.menus[i].selected = false;
       }
     }
+  }
+
+  logout() {
+    States.LogOut();
+    this.router.navigate(['/login']);
   }
 }

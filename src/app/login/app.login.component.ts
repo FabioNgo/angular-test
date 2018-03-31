@@ -20,10 +20,10 @@ export class AppLoginComponent {
 
   constructor(router: Router) {
     this.router = router;
-    this.usernameFormControl = new FormControl('', [
+    this.usernameFormControl = new FormControl(Constants.username, [
       Validators.required,
     ]);
-    this.passwordFormControl = new FormControl('', [
+    this.passwordFormControl = new FormControl(Constants.password, [
       Validators.required,
     ]);
     this.loginErrorMatcher = new LoginErrorStateMatcher();

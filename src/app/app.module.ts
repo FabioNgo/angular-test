@@ -38,6 +38,11 @@ const appRoutes: Routes = [
     component: AppListComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'cases',
+        pathMatch: 'full'
+      },
+      {
         path: 'cases',
         component: AppListCasesComponent
       }

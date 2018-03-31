@@ -1,5 +1,5 @@
 export class States {
-  private static loggedIn = true;
+  private static loggedIn = false;
   public static LogIn(): void {
     this.loggedIn = true;
   }
