@@ -1,7 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DATE_FORMATS, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {User} from '../../../models/user';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import * as moment from 'moment';
 
 export const MY_FORMATS = {
   parse: {
@@ -42,5 +43,17 @@ export class AppListCasesEditComponent {
 
   onNoClick(): void {
 
+  }
+
+  updateAccount() {
+    if (this.editFormGroup.invalid) {
+      this.editFormGroup.markAsTouched({onlySelf: false});
+      return;
+    }
+    this.user.birthDate = moment(this.editFormGroup.get('birthDate').value).format('YYYY/MM/DD');
+    this.user.lastName = this.editFormGroup.get('lastName').value;
+    this.user.phoneNumber = this.editFormGroup.get('phoneNumber').value;
+    this.user.firstName = this.editFormGroup.get('firstName').value;
+    this.dialogRef.close(this.user);
   }
 }

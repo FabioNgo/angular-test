@@ -22,6 +22,11 @@ export class User {
     this.birthDate = birthDate;
   }
 
+  public getFormattedBirthDate() {
+    const result = moment(this.birthDate, 'YYYY/MM/DD');
+    return result.format('MM/DD/YYYY');
+  }
+
   public getBirthDate(): string {
     const result = moment(this.birthDate, 'YYYY/MM/DD');
     return result.toISOString();
