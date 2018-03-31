@@ -1,5 +1,6 @@
 .edit-modal {
-  width: 500px;
+  width: auto;
+  padding: 10pt;
 }
 .edit-header {
   color: red;

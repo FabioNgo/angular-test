@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {States} from "../utilities/States";
+import {EventListener} from "../utilities/EventListener";
+import {Listener} from "../utilities/Listener";
 
 @Component({
   selector: 'app-list',
@@ -11,6 +13,7 @@ import {States} from "../utilities/States";
 export class AppListComponent implements OnInit {
   router: Router;
   route: ActivatedRoute;
+  isMobile = false;
   menus = [
     {
       name: 'Cases',
@@ -35,6 +38,14 @@ export class AppListComponent implements OnInit {
   constructor(router: Router, route: ActivatedRoute) {
     this.router = router;
     this.route = route;
+    const self = this;
+    self.isMobile = window.innerWidth < 840;
+    EventListener.onWidthChangeListener({
+      notify(data) {
+        self.isMobile = data < 840;
+      }
+    });
+
   }
 
   ngOnInit(): void {
