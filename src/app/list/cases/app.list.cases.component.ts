@@ -4,7 +4,7 @@ import {User} from '../../models/user';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MyPaginatorComponent} from '../../utilities/mypaginator/app.utilities.mypaginator.component';
 import {AppListCasesEditComponent} from './edit/app.list.cases.edit.component';
-import {EventListener} from "../../utilities/EventListener";
+import {EventListener} from '../../utilities/EventListener';
 
 
 @Component({
@@ -67,9 +67,13 @@ export class AppListCasesComponent implements AfterViewInit {
   }
 
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      for (const row of this.dataSource.data) {
+        this.selection.select(row);
+      }
+    }
   }
 
   isAllSelected() {
@@ -123,11 +127,11 @@ export class AppListCasesComponent implements AfterViewInit {
   selectedCharacterChange(character: string) {
     const countryFilterList = [];
     const allCountryFilterList = this.getCountryList();
-    allCountryFilterList.forEach(function (country) {
+    for (const country of allCountryFilterList) {
       if (country.charAt(0).toUpperCase() === character) {
         countryFilterList.push(country);
       }
-    });
+    }
     this.countryFilterList = countryFilterList;
   }
 
@@ -200,19 +204,19 @@ export class AppListCasesComponent implements AfterViewInit {
     }
     let countrySelected = new Set<string>();
     if (this.selectedCountryFilterList.size === 0) {
-      this.getCountryList().forEach(function (e) {
+      for (const e of this.getCountryList()) {
         countrySelected.add(e);
-      });
+      }
     } else {
       countrySelected = this.selectedCountryFilterList;
     }
-    data.forEach(function (e) {
+    for (const e of data) {
       const country = e.country;
       const status = e.completed ? 'Completed' : 'Uncompleted';
       if (statusSelected.has(status) && countrySelected.has(country)) {
         filteredData.push(e);
       }
-    });
+    }
     this.dataSource.data = filteredData;
   }
 
