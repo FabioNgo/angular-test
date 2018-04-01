@@ -21,7 +21,7 @@ export class AppLoginComponent {
   constructor(router: Router) {
     this.router = router;
     this.usernameFormControl = new FormControl(Constants.username, [
-      Validators.required,
+      Validators.required, Validators.email
     ]);
     this.passwordFormControl = new FormControl(Constants.password, [
       Validators.required,
