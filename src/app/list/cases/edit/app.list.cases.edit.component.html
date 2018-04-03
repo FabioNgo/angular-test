@@ -39,7 +39,7 @@
         <div>
           <mat-form-field>
             <input matInput  [matDatepicker]="myDatepicker" placeholder="Birth Date" required
-                   formControlName="birthDate" disabled="true">
+                   formControlName="birthDate">
 
             <mat-hint></mat-hint>
             <mat-error *ngIf="editFormGroup.get('birthDate').hasError('required')">

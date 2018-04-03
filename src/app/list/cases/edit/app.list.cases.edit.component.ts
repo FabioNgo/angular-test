@@ -46,8 +46,10 @@ export class AppListCasesEditComponent {
   }
 
   updateAccount() {
-    if (this.editFormGroup.invalid) {
-      this.editFormGroup.markAsTouched({onlySelf: false});
+    for (const inner in this.editFormGroup.controls) {
+      this.editFormGroup.get(inner).markAsTouched();
+    }
+    if (this.editFormGroup.invalid || this.editFormGroup.dirty) {
       return;
     }
     this.user.birthDate = moment(this.editFormGroup.get('birthDate').value).format('YYYY/MM/DD');

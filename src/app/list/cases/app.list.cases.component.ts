@@ -82,7 +82,8 @@ export class AppListCasesComponent implements AfterViewInit {
     return numSelected === numRows;
   }
 
-  openModal(element) {
+  openModal(element,$event) {
+    $event.stopPropagation();
     const diaLogRef = this.editModal.open(AppListCasesEditComponent, {
       data: element
     });
